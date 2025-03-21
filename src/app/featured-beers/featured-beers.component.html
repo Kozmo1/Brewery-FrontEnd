@@ -5,39 +5,14 @@
     </div>
   
     <div class="cards-container">
-      <!-- Beer Card 1 -->
-      <div class="beer-card">
-        <div class="beer-title">Single Hop IPA</div>
-        <img class="beer-image" src="assets/SingleHop.webp" alt="Single Hop IPA"/>
-        <div class="beer-description">A single Hop IPA made with Galaxy hops. Notes of passionfruit, peach, citrus and a touch of guava. 6% alc/vol</div>
-        <div class="beer-price">$3.99</div>
-      </div>
-  
-      <!-- Beer Card 2 -->
-      <div class="beer-card">
-        <div class="beer-title">Out of Office Tropical IPA</div>
-        <img class="beer-image" src="assets/OutOfOffice.webp" alt="Out of Office Tropical IPA" />
-        <div class="beer-description">This Tropical IPA is bursting with juicy notes of pineapple, tangerine and passionfruit. 6.2% alc/vol</div>
-        <div class="beer-price">$3.99</div>
-      </div>
-  
-      <!-- Beer Card 3 -->
-      <div class="beer-card">
-        <div class="beer-title">Dry Hopped Wheat Ale</div>
-        <img class="beer-image" src="assets/muskoka_dry.webp" alt="Dry Hopped Wheat Ale" />
-        <div class="beer-description">Juicy notes of pineapple, tangerine, and passionfruit. 6.2% alc/vol</div>
-        <div class="beer-price">$3.99</div>
-      </div>
-  
-      <!-- Beer Card 4 -->
-      <div class="beer-card">
-        <div class="beer-title">Mullets and Moustaches Aussie Middy</div>
-        <img class="beer-image" src="assets/MulletsAndMoustaches.webp" alt="Mullets and Moustaches Aussie Middy" />
-        <div class="beer-description">
-          Pouring a hazy lemon hue with a tropical and citrusy aroma. This Australian Middy features sweet tangerine notes with passionfruit, zesty citrus peel, and juicy peach. The finish is balanced, refreshing, and crisp! 4% alc/vol
-        </div>
-        <div class="beer-price">$4.99</div>
+      <!-- Loop through beers -->
+      <div class="beer-card" *ngFor="let beer of beers">
+        <a [routerLink]="['/products', beer.id]" class="beer-link">
+          <div class="beer-title">{{ beer.name }}</div>
+          <img class="beer-image" [src]="'assets/' + beer.image" [alt]="beer.name"/>
+          <div class="beer-description">{{ beer.description }}</div>
+          <div class="beer-price">${{ beer.price }}</div>
+        </a>
       </div>
     </div>
-  </div>
-  
+</div>
