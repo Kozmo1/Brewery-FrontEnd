@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+<div class="products-section">
+  <img class="products-icon" src="assets/beerIcon.png" alt="Beer Icon">
+  
+  <h1 class="products-title">Products</h1>
+
+  <div class="products-container">
+    <div class="product-card" *ngFor="let product of products">
+      <h2 class="product-name">{{ product.name }}</h2>
+      <div class="product-details">
+        <div class="product-image-wrapper">
+          <img class="product-image" [src]="'assets/' + product.image" [alt]="product.name">
+        </div>
+        <div class="product-info">
+          <p class="product-description">{{ product.description }}</p>
+          <p class="product-price">${{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

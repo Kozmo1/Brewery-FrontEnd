@@ -1,68 +1,77 @@
 .featured-section {
-    align-self: stretch;
-    height: auto;
     padding: 64px;
-    background: white;
-    display: inline-flex;
+    background-color: #ffffff;
+    display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 48px;
-    position: relative;
-  }
-  
-  .featured-heading {
-    position: absolute;
-    top: 79px;
-    left: 140px;
-    color: #1E1E1E;
-    font-size: 24px;
-    font-family: Inter, sans-serif;
-    font-weight: 600;
-    line-height: 28.8px;
-  }
-  
-  .featured-content {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 48px;
-    align-items: flex-start;
-    justify-content: flex-start;
+    gap: 32px;
+    align-items: center;
     width: 100%;
-  }
-  
-  .featured-icon {
+}
+
+.featured-heading {
+    color: #1E1E1E;
+    font-size: 32px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.featured-icon {
     width: 47px;
     height: 76px;
-  }
-  
-  .cards-container {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 48px;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Adjust size */
+    gap: 32px;
+    justify-content: center;
     align-items: flex-start;
-    justify-content: flex-start;
     width: 100%;
-  }
-  
-  .beer-card {
-    width: 501px;
-    min-width: 300px;
-    padding: 24px;
-    background: white;
-    border-radius: 8px;
-    outline: 1px solid #D9D9D9;
-    outline-offset: -1px;
-    display: inline-flex;
+    max-width: 1200px;
+}
+
+.beer-card {
+    width: 100%;
+    max-width: 450px;  /* Increased max width */
+    padding: 32px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    border: 1px solid #D9D9D9;
+    display: flex;
     flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
+    gap: 16px;
+    align-items: center;
     justify-content: flex-start;
-  }
-  
-  .beer-title {
-    font-size: 24px;
-    font-family: Inter, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.beer-title {
+    font-size: 28px; /* Bigger title */
+    font-weight: 700;
+    color: #1E1E1E;
+    text-align: center;
+}
+
+.beer-image {
+    width: 80%; /* Adjusted width to be more prominent */
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.beer-description {
+    color: #757575;
+    font-size: 18px; /* Increased font size */
+    font-weight: b;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.beer-price {
+    font-size: 18px;
     font-weight: 600;
-    color: #1E1E1E
-  
+    color: #B3B3B3;
+}

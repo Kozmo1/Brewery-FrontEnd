@@ -1,47 +1,39 @@
 .hero-section {
-    align-self: stretch;
-    height: 416px;
-    padding: 160px 24px; /* shorthand: top-bottom left-right */
-    background: #F5F5F5; /* You can replace with a custom variable */
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 32px;
-  }
-  
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .hero-title {
-    align-self: stretch;
-    text-align: center;
-    color: #1E1E1E;
-    font-size: 72px;
-    font-family: Inter, sans-serif;
-    font-weight: 700;
-    line-height: 86.4px;
-    word-wrap: break-word;
-    margin: 0; /* reset default margins */
-  }
-  
-  .hero-subtitle {
-    align-self: stretch;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    color: #757575;
-    font-size: 32px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    line-height: 38.4px;
-    word-wrap: break-word;
-    margin: 0; /* reset default margins */
-  }
-  
+  width: 100vw;  /* Make sure it spans the entire viewport width */
+  height: 416px;
+  padding: 160px 24px;
+  background: #F5F5F5;
+  display: flex; /* Use flex instead of inline-flex */
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center; /* Ensure text is centered */
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-title {
+  color: #1E1E1E;
+  font-size: 72px;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  line-height: 86.4px;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.hero-subtitle {
+  color: #757575;
+  font-size: 32px;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  line-height: 38.4px;
+  word-wrap: break-word;
+  margin: 0;
+}
