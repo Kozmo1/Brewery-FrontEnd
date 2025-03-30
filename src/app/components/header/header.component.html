@@ -1,19 +1,18 @@
 <div class="header-container">
+  <a routerLink="/" class="logo-link">
     <img class="header-logo" src="assets/logo.jpg" alt="Logo" />
-  
+  </a>
     <nav class="header-nav">
-        <a routerLink="/" class="nav-item">Home</a>
-      <a routerLink="/products" class="nav-item">Products</a>
-      <a class="nav-item">Solutions</a>
-      <a class="nav-item">Community</a>
-      <a class="nav-item">Resources</a>
-      <a class="nav-item">About Us</a>
-      <a class="nav-item">Contact</a>
+      <a routerLink="/" routerLinkActive="active" class="nav-item" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/products" routerLinkActive="active" class="nav-item">Products</a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-item">Profile</a>
+      <a routerLink="/about" routerLinkActive="active" class="nav-item">About Us</a>
+      <a routerLink="/cart" routerLinkActive="active" class="nav-item">Cart</a>
     </nav>
   
     <div class="auth-actions">
-      <button class="btn btn-neutral"></button>
-      <button class="btn btn-primary"></button>
+      <button class="btn btn-neutral" routerLink="/login">Sign In</button>
+      <button class="btn btn-primary" routerLink="/register">Register</button>
     </div>
   </div>
   

@@ -1,0 +1,69 @@
+<div class="profile-layout">
+    <!-- Sidebar -->
+    <aside class="profile-sidebar">
+      <button (click)="activeTab = 'details'" [class.active]="activeTab === 'details'">Profile Details</button>
+      <button (click)="activeTab = 'payments'" [class.active]="activeTab === 'payments'">Payments</button>
+      <button (click)="activeTab = 'recommendations'" [class.active]="activeTab === 'recommendations'">Recommendations</button>
+      <button (click)="activeTab = 'orders'" [class.active]="activeTab === 'orders'">Orders</button>
+    </aside>
+  
+    <!-- Main Content -->
+    <section class="profile-content">
+      <div *ngIf="activeTab === 'details'" class="tab-content">
+        <h2>Profile Details</h2>
+        <p><strong>Name:</strong> Jane Doe</p>
+        <p><strong>Address:</strong> 123 Brewery Lane, Beer City</p>
+      </div>
+  
+      <div *ngIf="activeTab === 'payments'" class="tab-content">
+        <h2>Payment Information</h2>
+        <p>No cards on file.</p>
+        <!-- You can hook up form or Stripe integration later -->
+      </div>
+  
+      <div *ngIf="activeTab === 'recommendations'" class="tab-content">
+        <h2>Beer Recommendations</h2>
+  
+        <div class="form-group">
+          <label for="taste">Preferred Taste:</label>
+          <select id="taste" [(ngModel)]="preferences.taste">
+            <option value="hoppy">Hoppy</option>
+            <option value="sour">Sour</option>
+            <option value="malty">Malty</option>
+            <option value="fruity">Fruity</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label for="type">Beer Type:</label>
+          <select id="type" [(ngModel)]="preferences.type">
+            <option value="ipa">IPA</option>
+            <option value="lager">Lager</option>
+            <option value="blonde">Blonde</option>
+            <option value="stout">Stout</option>
+          </select>
+        </div>
+  
+        <p class="recommendation-msg">You prefer {{ preferences.taste }} {{ preferences.type }}s 🍺</p>
+      </div>
+      
+      <div *ngIf="activeTab === 'orders'" class="tab-content">
+        <h2>Your Orders</h2>
+      
+        <div *ngIf="orders.length > 0; else noOrders">
+          <ul class="order-list">
+            <li *ngFor="let order of orders">
+              <p><strong>Order #{{ order.id }}</strong></p>
+              <p>{{ order.date }} – {{ order.items.length }} item(s)</p>
+              <p>Total: ${{ order.total }}</p>
+            </li>
+          </ul>
+        </div>
+      
+        <ng-template #noOrders>
+          <p>You have no orders yet.</p>
+        </ng-template>
+      </div>      
+    </section>
+  </div>
+  

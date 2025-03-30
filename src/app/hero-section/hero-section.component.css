@@ -1,13 +1,13 @@
 .hero-section {
-  width: 100vw;  /* Make sure it spans the entire viewport width */
-  height: 416px;
+  width: 100vw;  
+  height: 216px;
   padding: 160px 24px;
   background: #F5F5F5;
-  display: flex; /* Use flex instead of inline-flex */
+  display: flex; 
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  text-align: center; /* Ensure text is centered */
+  justify-content: center;
+  align-items: center; 
+  text-align: center; 
 }
 
 .hero-content {

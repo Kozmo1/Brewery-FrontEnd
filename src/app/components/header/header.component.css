@@ -18,35 +18,45 @@
     height: 113.25px;
 }
 
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
 .header-nav {
     flex: 1 1 0;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 8px;
+    align-items: center; 
+    gap: 12px;
     flex-wrap: wrap;
-}
+  }
+  
 
 .nav-item {
-    padding: 8px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #E3E3E3;
     font-size: 16px;
     font-family: Inter, sans-serif;
-    font-weight: 400;
-    line-height: 16px;
-    cursor: pointer;
-}
-
-.nav-item.active {
-    background: #F5F5F5;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  
+  .nav-item:hover {
+    background: #444035;
+    color: #ffffff;
+  }
+  
+  .nav-item.active {
+    background: #ffffff;
     color: #1E1E1E;
-}
-
+    font-weight: 600;
+  }
+  
 .auth-actions {
     width: 178px;
     display: flex;
@@ -76,4 +86,5 @@
 .btn-primary {
     background: #2C2C2C;
     outline: 1px solid #2C2C2C;
+    color: #E3E3E3;
 }

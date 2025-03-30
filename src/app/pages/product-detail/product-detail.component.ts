@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-
-import { HeaderComponent } from '../../components/header/header.component';
-import { FooterComponent } from '../../components/footer/footer.component';
+import { CartService } from '../../services/cart.service';
+import { ToastService } from '../../services/toast.service';
+import { CartItem } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule],
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
@@ -46,11 +46,32 @@ export class ProductDetailComponent {
 
   ];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private cartService: CartService, private toast: ToastService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.product = this.products.find(p => p.id === params['id']);
     });
   }
+
+  addToCart(beer: Beer) {
+    const item: CartItem = {
+      id: beer.id,
+      name: beer.name,
+      price: beer.price,
+      quantity: 1,
+      image: beer.image
+    };
+    this.cartService.addToCart(item);
+    this.toast.show(`${beer.name} added to cart!`);
+
+  }
+
+}
+interface Beer {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
 }

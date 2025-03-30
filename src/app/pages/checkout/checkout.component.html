@@ -1,0 +1,45 @@
+<div class="checkout-wrapper">
+    <h1>Checkout</h1>
+  
+    <div class="checkout-grid">
+      <!-- Shipping Info -->
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="shipping-form">
+        <h2>Shipping Information</h2>
+  
+        <label>
+          Full Name
+          <input type="text" formControlName="fullName" />
+        </label>
+  
+        <label>
+          Address
+          <input type="text" formControlName="address" />
+        </label>
+  
+        <label>
+          City
+          <input type="text" formControlName="city" />
+        </label>
+  
+        <label>
+          Postal Code
+          <input type="text" formControlName="postalCode" />
+        </label>
+  
+        <button type="submit" [disabled]="checkoutForm.invalid">Place Order</button>
+      </form>
+  
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Your Order</h2>
+        <ul>
+          <li *ngFor="let item of cartItems">
+            {{ item.quantity }}× {{ item.name }} – ${{ item.price * item.quantity | number:'1.2-2' }}
+          </li>
+        </ul>
+        <hr />
+        <p><strong>Total:</strong> ${{ total }}</p>
+      </div>
+    </div>
+  </div>
+  

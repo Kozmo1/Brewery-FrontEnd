@@ -1,0 +1,36 @@
+<div class="about-wrapper">
+    <div class="about-content">
+      <h1>About Good Boy Brews</h1>
+      <p>
+        At <strong>Good Boy Brews</strong>, we believe in crafting beers that not only taste amazing, but bring people together.
+        Whether you're a fan of hoppy IPAs, smooth lagers, or fruity ales — there's a brew here for every kind of beer lover.
+      </p>
+  
+      <p>
+        What started as a small passion project turned into a community-driven brewery focused on creativity, quality, and a whole lot of personality.
+        And yes, our mascot is a really good boy 🐶.
+      </p>
+
+      <h2>Meet the Team 🍻</h2>
+      <ul class="about-list">
+        <li>Joel Attard</li>
+        <li>Shahyar Fida</li>
+        <li>Mike Kraemer</li>
+        <li>Julia Lebedzeva</li>
+      </ul>
+  
+      <p class="cheers">Cheers, and thanks for supporting your local brew crew! 🍺</p>
+      <div class="mascot-wrapper">
+        <img
+        [src]="isHovering ? 'assets/superhappydogbeer.png' : 'assets/happydogbeer.png'"
+        [class.tail-wag]="isHovering"
+
+        (mouseenter)="isHovering = true"
+        (mouseleave)="isHovering = false"
+        alt="Good Boy"
+        class="mascot-image"
+      />
+      </div>
+    </div>
+  </div>
+  

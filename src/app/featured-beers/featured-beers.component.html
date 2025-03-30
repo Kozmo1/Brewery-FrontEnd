@@ -7,12 +7,13 @@
     <div class="cards-container">
       <!-- Loop through beers -->
       <div class="beer-card" *ngFor="let beer of beers">
+        <div class="beer-title">{{ beer.name }}</div> 
         <a [routerLink]="['/products', beer.id]" class="beer-link">
-          <div class="beer-title">{{ beer.name }}</div>
-          <img class="beer-image" [src]="'assets/' + beer.image" [alt]="beer.name"/>
+          <img class="beer-image" [src]="'assets/' + beer.image" [alt]="beer.name" />
           <div class="beer-description">{{ beer.description }}</div>
           <div class="beer-price">${{ beer.price }}</div>
         </a>
       </div>
+      
     </div>
 </div>
