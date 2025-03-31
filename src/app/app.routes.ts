@@ -12,5 +12,7 @@ export const routes: Routes = [
   { path: 'about', loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent) }, // About Us Page
   { path: 'login', loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent) }, // Login Page
   { path: 'register', loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent) }, // Register Page
-  { path: 'checkout', loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent) } // Checkout Page   
+  { path: 'checkout', loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent) }, // Checkout Page   
+  { path: 'contact', loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent) } // Contact Page   
+
 ]; 
