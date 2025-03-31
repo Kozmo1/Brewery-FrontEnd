@@ -1,19 +1,21 @@
 <div class="featured-section">
-    <div class="featured-heading">
-      <img class="featured-icon" src="assets/beerIcon.png" alt="Beer Icon" />
-      Our Featured Beer
+  <div class="featured-heading">
+    <img class="featured-icon" src="assets/beerIcon.png" alt="Beer Icon" />
+    Our Featured Beer
+  </div>
+
+  <div class="cards-container">
+    <div class="beer-card" *ngFor="let beer of beers">
+      <div class="beer-title">{{ beer.name }}</div>
+      <a [routerLink]="['/products', beer.id]" class="beer-link">
+        <img
+          class="beer-image"
+          [src]="'assets/' + beer.image"
+          [alt]="beer.name"
+        />
+        <div class="beer-description">{{ beer.description }}</div>
+        <div class="beer-price">${{ beer.price }}</div>
+      </a>
     </div>
-  
-    <div class="cards-container">
-      <!-- Loop through beers -->
-      <div class="beer-card" *ngFor="let beer of beers">
-        <div class="beer-title">{{ beer.name }}</div> 
-        <a [routerLink]="['/products', beer.id]" class="beer-link">
-          <img class="beer-image" [src]="'assets/' + beer.image" [alt]="beer.name" />
-          <div class="beer-description">{{ beer.description }}</div>
-          <div class="beer-price">${{ beer.price }}</div>
-        </a>
-      </div>
-      
-    </div>
+  </div>
 </div>
