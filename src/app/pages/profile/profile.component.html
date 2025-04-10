@@ -11,14 +11,24 @@
     <section class="profile-content">
       <div *ngIf="activeTab === 'details'" class="tab-content">
         <h2>Profile Details</h2>
-        <p><strong>Name:</strong> Jane Doe</p>
-        <p><strong>Address:</strong> 123 Brewery Lane, Beer City</p>
-      </div>
+        <p><strong>Name:</strong> {{profile?.name}}</p>
+        <ng-container *ngIf="profile?.shippingAddress; else noAddress">
+          <p>
+            <strong>Address:</strong> <br> 
+            Address: {{ profile?.shippingAddress?.street }} <br> 
+            City: {{ profile?.shippingAddress?.city }} <br>
+            Postal: {{ profile?.shippingAddress?.postalCode }} <br>
+            Province: {{ profile?.shippingAddress?.province }} <br>
+          </p>
+        </ng-container>
+        <ng-template #noAddress>
+          <p><strong>Address:</strong> No shipping address available.</p>
+        </ng-template>
+              </div>
   
       <div *ngIf="activeTab === 'payments'" class="tab-content">
         <h2>Payment Information</h2>
         <p>No cards on file.</p>
-        <!-- You can hook up form or Stripe integration later -->
       </div>
   
       <div *ngIf="activeTab === 'recommendations'" class="tab-content">
