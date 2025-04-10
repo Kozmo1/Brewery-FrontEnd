@@ -2,17 +2,33 @@
   <a routerLink="/" class="logo-link">
     <img class="header-logo" src="assets/logo.jpg" alt="Logo" />
   </a>
-    <nav class="header-nav">
-      <a routerLink="/" routerLinkActive="active" class="nav-item" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a routerLink="/products" routerLinkActive="active" class="nav-item">Products</a>
-      <a routerLink="/profile" routerLinkActive="active" class="nav-item">Profile</a>
-      <a routerLink="/about" routerLinkActive="active" class="nav-item">About Us</a>
-      <a routerLink="/cart" routerLinkActive="active" class="nav-item">Cart</a>
-    </nav>
-  
-    <div class="auth-actions">
+
+  <nav class="header-nav">
+    <a routerLink="/" routerLinkActive="active" class="nav-item" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/products" routerLinkActive="active" class="nav-item">Products</a>
+
+    <!-- Only show 'Profile' if the user is logged in -->
+    <a
+      *ngIf="authService.loggedIn$ | async"
+      routerLink="/profile"
+      routerLinkActive="active"
+      class="nav-item"
+    >
+      Profile
+    </a>
+
+    <a routerLink="/about" routerLinkActive="active" class="nav-item">About Us</a>
+    <a routerLink="/cart" routerLinkActive="active" class="nav-item">Cart</a>
+  </nav>
+
+  <div class="auth-actions">
+    <ng-container *ngIf="authService.loggedIn$ | async; else notLoggedIn">
+      <button class="btn btn-neutral" (click)="logout()">Log Out</button>
+    </ng-container>
+
+    <ng-template #notLoggedIn>
       <button class="btn btn-neutral" routerLink="/login">Sign In</button>
       <button class="btn btn-primary" routerLink="/register">Register</button>
-    </div>
+    </ng-template>
   </div>
-  
+</div>
