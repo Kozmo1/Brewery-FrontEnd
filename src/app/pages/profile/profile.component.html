@@ -26,54 +26,112 @@
         </ng-template>
               </div>
   
-      <div *ngIf="activeTab === 'payments'" class="tab-content">
-        <h2>Payment Information</h2>
-        <p>No cards on file.</p>
-      </div>
+              <div *ngIf="activeTab === 'payments'" class="tab-content">
+                <h2>Payment History</h2>
+              
+                <ng-container *ngIf="profile!.payments.length > 0; else noPayments">
+                  <ul>
+                    <li *ngFor="let payment of profile!.payments">
+                      <p><strong>Payment #{{ payment.paymentId }}</strong></p>
+                      <p>Order ID: {{ payment.orderId }}</p>
+                      <p>Amount: ${{ payment.amount }}</p>
+                      <p>Status: {{ payment.status }}</p>
+                      <p>Method: {{ payment.paymentMethod }}</p>
+                      <p>Date: {{ payment.processedAt | date: 'medium' }}</p>
+                      <hr />
+                    </li>
+                  </ul>
+                </ng-container>
+              
+                <ng-template #noPayments>
+                  <p>No payments on file.</p>
+                </ng-template>
+              </div>
+              
   
-      <div *ngIf="activeTab === 'recommendations'" class="tab-content">
-        <h2>Beer Recommendations</h2>
-  
-        <div class="form-group">
-          <label for="taste">Preferred Taste:</label>
-          <select id="taste" [(ngModel)]="preferences.taste">
-            <option value="hoppy">Hoppy</option>
-            <option value="sour">Sour</option>
-            <option value="malty">Malty</option>
-            <option value="fruity">Fruity</option>
-          </select>
-        </div>
-  
-        <div class="form-group">
-          <label for="type">Beer Type:</label>
-          <select id="type" [(ngModel)]="preferences.type">
-            <option value="ipa">IPA</option>
-            <option value="lager">Lager</option>
-            <option value="blonde">Blonde</option>
-            <option value="stout">Stout</option>
-          </select>
-        </div>
-  
-        <p class="recommendation-msg">You prefer {{ preferences.taste }} {{ preferences.type }}s 🍺</p>
-      </div>
+              <div *ngIf="activeTab === 'recommendations'" class="tab-content">
+                <h2>Beer Recommendations</h2>
+              
+                <div *ngIf="profile?.tasteProfile; else manualPreferences">
+                  <p><strong>Your Taste Profile:</strong></p>
+                  <ul>
+                    <li *ngIf="profile?.tasteProfile?.primaryFlavor">Primary Flavor: {{ profile?.tasteProfile?.primaryFlavor }}</li>
+                    <li *ngIf="profile?.tasteProfile?.sweetness">Sweetness: {{ profile?.tasteProfile?.sweetness }}</li>
+                    <li *ngIf="profile?.tasteProfile?.bitterness">Bitterness: {{ profile?.tasteProfile?.bitterness }}</li>
+                    <li *ngIf="profile?.tasteProfile?.body">Body: {{ profile?.tasteProfile?.body }}</li>
+                    <li *ngIf="profile?.tasteProfile?.mouthfeel">Mouthfeel: {{ profile?.tasteProfile?.mouthfeel }}</li>
+                    <li *ngIf="profile?.tasteProfile?.acidity !== null">Acidity: {{ profile?.tasteProfile?.acidity }}</li>
+                    <li *ngIf="profile?.tasteProfile?.aftertaste">Aftertaste: {{ profile?.tasteProfile?.aftertaste }}</li>
+                    <li *ngIf="profile?.tasteProfile?.aroma">Aroma: {{ profile?.tasteProfile?.aroma }}</li>
+                  </ul>
+                </div>
+              
+                <ng-template #manualPreferences>
+                  <div class="form-group">
+                    <label for="taste">Preferred Taste:</label>
+                    <select id="taste" [(ngModel)]="preferences.taste">
+                      <option value="hoppy">Hoppy</option>
+                      <option value="sour">Sour</option>
+                      <option value="malty">Malty</option>
+                      <option value="fruity">Fruity</option>
+                    </select>
+                  </div>
+              
+                  <div class="form-group">
+                    <label for="type">Beer Type:</label>
+                    <select id="type" [(ngModel)]="preferences.type">
+                      <option value="ipa">IPA</option>
+                      <option value="lager">Lager</option>
+                      <option value="blonde">Blonde</option>
+                      <option value="stout">Stout</option>
+                    </select>
+                  </div>
+              
+                  <p class="recommendation-msg">
+                    You prefer {{ preferences.taste }} {{ preferences.type }}s 🍺
+                  </p>
+                </ng-template>
+              </div>
+              
       
-      <div *ngIf="activeTab === 'orders'" class="tab-content">
-        <h2>Your Orders</h2>
-      
-        <div *ngIf="orders.length > 0; else noOrders">
-          <ul class="order-list">
-            <li *ngFor="let order of orders">
-              <p><strong>Order #{{ order.id }}</strong></p>
-              <p>{{ order.date }} – {{ order.items.length }} item(s)</p>
-              <p>Total: ${{ order.total }}</p>
-            </li>
-          </ul>
-        </div>
-      
-        <ng-template #noOrders>
-          <p>You have no orders yet.</p>
-        </ng-template>
-      </div>      
+              <div *ngIf="activeTab === 'orders'" class="tab-content">
+                <h2>Your Orders</h2>
+              
+                <ng-container *ngIf="profile?.orders; else noOrders">
+                  <ul class="order-list">
+                    <li *ngFor="let order of profile!.orders">
+                      <p><strong>Order #{{ order.id }}</strong></p>
+                      <p>{{ order.orderDate | date:'mediumDate' }} – {{ order.items.length }} item(s)</p>
+              
+                      <ul>
+                        <li *ngFor="let item of order.items">
+                          {{ item.quantity }}x {{ item.product }} — ${{ item.priceAtOrder }}
+                        </li>
+                      </ul>
+              
+                      <p><strong>Total:</strong> ${{ order.totalPrice }}</p>
+                      <p>Status: {{ order.status }}</p>
+              
+                      <div style="margin-top: 8px;">
+                        <p><strong>Shipping Address:</strong></p>
+                        <ul>
+                          <li *ngIf="order.shippingAddress?.street">Street: {{ order.shippingAddress.street }}</li>
+                          <li *ngIf="order.shippingAddress?.city">City: {{ order.shippingAddress.city }}</li>
+                          <li *ngIf="order.shippingAddress?.postalCode">Postal: {{ order.shippingAddress.postalCode }}</li>
+                          <li *ngIf="order.shippingAddress?.province">Province: {{ order.shippingAddress.province }}</li>
+                        </ul>
+                      </div>
+              
+                      <hr />
+                    </li>
+                  </ul>
+                </ng-container>
+              
+                <ng-template #noOrders>
+                  <p>You have no orders yet.</p>
+                </ng-template>
+              </div>
+                  
     </section>
   </div>
   

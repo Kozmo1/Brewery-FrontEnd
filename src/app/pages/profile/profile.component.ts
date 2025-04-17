@@ -11,6 +11,44 @@ interface Profile {
     province: string;
     postalCode: string;
   } | null;
+  tasteProfile: {
+    primaryFlavor?: string;
+    secondaryFlavors?: string;
+    sweetness?: string;
+    bitterness?: string;
+    mouthfeel?: string;
+    body?: string;
+    acidity?: number;
+    aftertaste?: string;
+    aroma?: string;
+  } | null;
+  orders: {
+    id: number;
+    orderDate: string;
+    deliveryDate: string | null;
+    status: string;
+    totalPrice: number;
+    shippingAddress: {
+      street: string;
+      city: string;
+      province: string;
+      postalCode: string;
+    };
+    items: {
+      id: number;
+      product: string;
+      quantity: number;
+      priceAtOrder: number;
+    }[];
+  }[];
+  payments: {
+    paymentId: number;
+    orderId: number;
+    amount: number;
+    paymentMethod: string;
+    status: string;
+    processedAt: string;
+  }[];
 }
 
 @Component({
@@ -31,27 +69,10 @@ export class ProfileComponent implements OnInit {
 
   activeTab: 'details' | 'payments' | 'recommendations' | 'orders' = 'details';
 
-  // Static preference values
   preferences = {
     taste: 'hoppy',
     type: 'ipa'
   };
-
-  // Static orders data
-  orders = [
-    {
-      id: 1001,
-      date: 'Mar 12, 2025',
-      items: ['Out of Office IPA', 'Single Hop IPA'],
-      total: 11.98
-    },
-    {
-      id: 1002,
-      date: 'Mar 20, 2025',
-      items: ['Dry Hopped Wheat Ale'],
-      total: 3.99
-    }
-  ];
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -65,14 +86,12 @@ export class ProfileComponent implements OnInit {
       this.http.get<Profile>(this.profileUrl, { headers }).subscribe({
         next: (data) => {
           this.profile = data;
-          console.log('Profile data:', this.profile);
+          console.log(data);
         },
         error: (error) => {
           console.error("Error fetching profile:", error);
         }
       });
-    } else {
-      console.warn('Not running in a browser—skipping localStorage access.');
     }
   }
 }
