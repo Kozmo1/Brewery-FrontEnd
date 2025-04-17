@@ -1,43 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+export interface Beer {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+}
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, HttpClientModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
-  products = [
-    {
-      id: 'out-of-office-tropical-ipa',
-      name: 'Out of Office Tropical IPA',
-      image: 'OutOfOffice.webp',
-      description: 'This Tropical IPA is bursting with juicy notes of pineapple, tangerine, and passionfruit.',
-      price: 3.99
-    },
-    {
-      id: 'single-hop-ipa',
-      name: 'Single Hop IPA',
-      image: 'SingleHop.webp',
-      description: 'A single Hop IPA made with Galaxy hops. Notes of passionfruit, peach, citrus and a touch of guava.',
-      price: 3.99
-    },
-    {
-      id: 'muskoka-dry-hopped',
-      name: 'Dry Hopped Wheat Ale',
-      image: 'muskoka_dry.webp',
-      description: 'This Tropical IPA is bursting with juicy notes of pineapple, tangerine and passionfruit.',
-      price: 3.99
-    },
-    {
-      id: 'mullets-and-moustaches',
-      name: 'Mullets and Moustaches Aussie Middy',
-      image: 'MulletsAndMoustaches.webp',
-      description: 'Pouring a hazy lemon hue with a tropical and citrusy aroma...',
-      price: 4.99
-    }
-  ];
+export class ProductsComponent implements OnInit {
+  products: Beer[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get<Beer[]>('http://localhost:3001/inventory')
+      .subscribe({
+        next: (data) => {
+          this.products = data.slice(0, 10);
+        },
+        error: (err) => {
+          console.error('Error fetching beer data:', err);
+        }
+      });
+  }
 }

@@ -24,14 +24,15 @@ export class FeaturedBeersComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    // this.http.get<Beer[]>('http://localhost:3001/')
-    //   .subscribe({
-    //     next: (data) => {
-    //       this.beers = data;
-    //     },
-    //     error: (err) => {
-    //       console.error('Error fetching beer data:', err);
-    //     }
-    //   });
+    this.http.get<Beer[]>('http://localhost:3001/inventory')
+      .subscribe({
+        next: (data) => {
+          this.beers = data.slice(0, 3); 
+        },
+        error: (err) => {
+          console.error('Error fetching beer data:', err);
+        }
+      });
   }
+  
 }
